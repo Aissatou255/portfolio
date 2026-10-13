@@ -104,18 +104,18 @@ export default function Home() {
     <div className="font-sans text-gray-900">
       <Navbar />
 
-      <section id="accueil" className="relative min-h-screen flex items-center px-6 sm:px-12 pt-24 pb-16 overflow-hidden bg-white">
+      <section id="accueil" className="relative min-h-screen flex items-center px-6 sm:px-12 pt-28 pb-12 sm:pt-24 sm:pb-16 overflow-hidden bg-white">
         <div className="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-white -z-10" />
         <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-pink-100 blur-3xl opacity-60 -z-10" />
 
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center w-full">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 sm:gap-12 items-center w-full">
           <div className="flex justify-center lg:justify-start">
-            <img src={profil.photo_url || '/photo.jpg'} alt={profil.nom} className="w-full max-w-sm rounded-3xl shadow-2xl object-cover" />
+            <img src={profil.photo_url || '/photo.jpg'} alt={profil.nom} className="w-full max-w-xs sm:max-w-sm rounded-3xl shadow-2xl object-cover" />
           </div>
 
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl sm:text-6xl font-bold mb-2 leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>{profil.nom}</h1>
-            <p className="text-3xl sm:text-4xl text-pink-500 font-bold italic mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>{profil.titre}</p>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-2 leading-tight" style={{ fontFamily: "'Playfair Display', serif" }}>{profil.nom}</h1>
+            <p className="text-2xl sm:text-3xl lg:text-4xl text-pink-500 font-bold italic mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>{profil.titre}</p>
             <p className="max-w-md mx-auto lg:mx-0 text-gray-500 text-sm mb-3 leading-relaxed">{profil.bio}</p>
             <p className="text-xs text-gray-400 tracking-[0.2em] uppercase mb-8">{profil.sous_titre}</p>
             <a href="#contact" className="inline-block bg-black text-white px-8 py-3 rounded-full font-medium hover:bg-pink-600 transition shadow-lg">Me contacter</a>
@@ -123,12 +123,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="cequejefais" className="max-w-6xl mx-auto px-6 py-24">
+      <section id="cequejefais" className="max-w-6xl mx-auto px-6 py-16 sm:py-24">
         <p className="text-pink-500 text-sm font-semibold tracking-widest uppercase text-center mb-2">Compétences</p>
-        <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center">Ce que je fais</h2>
+        <h2 className="text-3xl sm:text-4xl font-bold mb-8 sm:mb-12 text-center">Ce que je fais</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {competences.map((comp, i) => (
-            <div key={comp.id || i} className="group rounded-2xl border border-pink-100 shadow-sm p-7 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 hover:border-pink-300 transition-all duration-300 bg-white">
+            <div key={comp.id || i} className="group rounded-2xl border border-pink-100 shadow-sm p-6 sm:p-7 flex flex-col items-center text-center hover:shadow-xl hover:-translate-y-1 hover:border-pink-300 transition-all duration-300 bg-white">
               <div className="w-14 h-14 rounded-full bg-pink-50 text-pink-500 flex items-center justify-center mb-4 group-hover:bg-pink-500 group-hover:text-white transition-colors duration-300">
                 <div className="w-7 h-7">{icons[comp.icone] || icons.code}</div>
               </div>
@@ -139,14 +139,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="realisations" className="bg-black text-white py-24">
+      <section id="realisations" className="bg-black text-white py-16 sm:py-24">
         <div className="max-w-4xl mx-auto px-6">
           <p className="text-pink-400 text-sm font-semibold tracking-widest uppercase text-center mb-2">Portfolio</p>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-16 text-center">Mes réalisations</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-10 sm:mb-16 text-center">Mes réalisations</h2>
 
           <div className="relative">
             <div className="hidden sm:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-pink-500 via-pink-400 to-pink-500 -translate-x-1/2" />
-            <div className="space-y-16">
+            <div className="space-y-10 sm:space-y-16">
               {realisations.map((r, i) => {
                 const gauche = i % 2 === 0
                 return (
@@ -154,11 +154,11 @@ export default function Home() {
                     <div className="hidden sm:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-pink-500 ring-4 ring-black items-center justify-center text-[10px] font-bold z-10">{i + 1}</div>
                     <div className={gauche ? 'sm:pr-14 sm:col-start-1' : 'sm:pl-14 sm:col-start-2'}>
                       <div className="group rounded-2xl overflow-hidden bg-white text-gray-900 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
-                        <div className="h-48 bg-gradient-to-br from-pink-100 to-pink-50 flex items-center justify-center text-pink-300 text-sm font-medium">
+                        <div className="h-44 sm:h-48 bg-gradient-to-br from-pink-100 to-pink-50 flex items-center justify-center text-pink-300 text-sm font-medium">
                           {r.image_url ? <img src={r.image_url} alt={r.titre} className="w-full h-full object-cover" /> : 'Photo à venir'}
                         </div>
-                        <div className="p-6">
-                          <span className="sm:hidden inline-block w-6 h-6 rounded-full bg-pink-500 text-white text-xs font-bold flex items-center justify-center mb-2">{i + 1}</span>
+                        <div className="p-5 sm:p-6">
+                          <span className="sm:hidden inline-flex w-6 h-6 rounded-full bg-pink-500 text-white text-xs font-bold items-center justify-center mb-2">{i + 1}</span>
                           <h3 className="font-semibold text-xl mb-2">{r.titre}</h3>
                           <p className="text-sm text-gray-500 mb-4 leading-relaxed">{r.description}</p>
                           {r.lien && <a href={r.lien} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-pink-600 text-sm font-semibold hover:gap-2 transition-all">Voir le projet →</a>}
@@ -173,15 +173,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="cv" className="max-w-4xl mx-auto px-6 py-24">
+      <section id="cv" className="max-w-4xl mx-auto px-6 py-16 sm:py-24">
         <p className="text-pink-500 text-sm font-semibold tracking-widest uppercase text-center mb-2">Parcours</p>
         <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-center">Mon CV</h2>
         <p className="text-gray-500 mb-10 text-center leading-relaxed">Étudiante en Licence 2 en développement web à AFI l'UE, sérieuse, dynamique et motivée. Capable de gérer des situations imprévues et de travailler sous pression.</p>
         <div className="grid sm:grid-cols-2 gap-8 mb-10">
           <div>
             <h3 className="text-pink-500 font-semibold text-sm uppercase tracking-widest mb-3 border-b border-pink-100 pb-2">Formation</h3>
-            <div className="flex justify-between text-sm mb-2"><span className="font-medium">Licence 2 en développement web — AFI l'UE</span><span className="text-gray-400">2026</span></div>
-            <div className="flex justify-between text-sm"><span className="font-medium">Baccalauréat — David Diop Mendès</span><span className="text-gray-400">2024</span></div>
+            <div className="flex flex-col sm:flex-row sm:justify-between text-sm mb-3 sm:mb-2"><span className="font-medium">Licence 2 en développement web — AFI l'UE</span><span className="text-gray-400">2026</span></div>
+            <div className="flex flex-col sm:flex-row sm:justify-between text-sm"><span className="font-medium">Baccalauréat — David Diop Mendès</span><span className="text-gray-400">2024</span></div>
           </div>
           <div>
             <h3 className="text-pink-500 font-semibold text-sm uppercase tracking-widest mb-3 border-b border-pink-100 pb-2">Compétences</h3>
@@ -189,7 +189,7 @@ export default function Home() {
           </div>
           <div>
             <h3 className="text-pink-500 font-semibold text-sm uppercase tracking-widest mb-3 border-b border-pink-100 pb-2">Expérience</h3>
-            <div className="flex justify-between text-sm mb-1"><span className="font-medium">Participante — compétition nationale de débat</span><span className="text-gray-400 whitespace-nowrap ml-2">2023/2024</span></div>
+            <div className="flex flex-col sm:flex-row sm:justify-between text-sm mb-2 sm:mb-1"><span className="font-medium">Participante — compétition nationale de débat</span><span className="text-gray-400 whitespace-nowrap sm:ml-2">2023/2024</span></div>
             <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside"><li>Développement de la communication orale</li><li>Argumentation et esprit critique</li><li>Gestion du stress et des situations de tension</li></ul>
           </div>
           <div>
@@ -206,30 +206,30 @@ export default function Home() {
           </div>
         </div>
         <div className="text-center">
-          <a href="/cv.pdf" download="CV_Aissatou_Dia.pdf" className="inline-block bg-pink-500 text-white px-10 py-4 rounded-full font-medium hover:bg-pink-600 hover:shadow-xl transition-all duration-300">Télécharger mon CV (PDF)</a>
+          <a href="/cv.pdf" download="CV_Aissatou_Dia.pdf" className="inline-block bg-pink-500 text-white px-8 sm:px-10 py-4 rounded-full font-medium hover:bg-pink-600 hover:shadow-xl transition-all duration-300">Télécharger mon CV (PDF)</a>
         </div>
       </section>
 
-      <section id="contact" className="relative py-24 overflow-hidden bg-black">
+      <section id="contact" className="relative py-16 sm:py-24 overflow-hidden bg-black">
         <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-pink-600 blur-3xl opacity-20" />
         <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-pink-500 blur-3xl opacity-20" />
-        <div className="relative max-w-5xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative max-w-5xl mx-auto px-6 grid lg:grid-cols-2 gap-10 sm:gap-12 items-center">
           <div className="text-white">
             <p className="text-pink-400 text-sm font-semibold tracking-widest uppercase mb-2">Contact</p>
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">Travaillons ensemble</h2>
             <p className="text-gray-400 mb-8 leading-relaxed max-w-sm">Une idée, un projet, une opportunité de stage ? N'hésite pas à me contacter, je réponds rapidement.</p>
             <div className="space-y-4">
               {contacts.map((contact, index) => (
-                <a key={index} href={contact.lien} target={contact.externe ? '_blank' : '_self'} rel="noreferrer" className="group flex items-center gap-4 hover:text-pink-400 transition-colors">
-                  <span className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-pink-500 transition-colors">
+                <a key={index} href={contact.lien} target={contact.externe ? '_blank' : '_self'} rel="noreferrer" className="group flex items-center gap-4 min-w-0 hover:text-pink-400 transition-colors">
+                  <span className="w-11 h-11 shrink-0 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-pink-500 transition-colors">
                     <span className="w-5 h-5">{iconeContact[contact.icone]}</span>
                   </span>
-                  <span className="text-sm sm:text-base">{contact.texte}</span>
+                  <span className="min-w-0 break-all text-sm sm:text-base">{contact.texte}</span>
                 </a>
               ))}
             </div>
           </div>
-          <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-2xl p-8 space-y-4">
+          <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-2xl p-6 sm:p-8 space-y-4">
             <input type="text" name="nom" placeholder="Nom" required value={form.nom} onChange={handleChange} className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-300 transition" />
             <input type="email" name="email" placeholder="Email" required value={form.email} onChange={handleChange} className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-300 transition" />
             <input type="text" name="sujet" placeholder="Sujet" value={form.sujet} onChange={handleChange} className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-300 transition" />
