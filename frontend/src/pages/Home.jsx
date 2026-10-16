@@ -40,12 +40,38 @@ const profilParDefaut = {
   github: 'https://github.com/Aissatou255',
 }
 
+const cvParDefaut = [
+  { section: 'formation', titre: "Licence 2 en développement web — AFI l'UE", periode: '2026', details: '' },
+  { section: 'formation', titre: 'Baccalauréat — David Diop Mendès', periode: '2024', details: '' },
+  { section: 'competences', titre: 'Développement web (bases)', periode: '', details: '' },
+  { section: 'competences', titre: 'Gestion du stress et des situations imprévues', periode: '', details: '' },
+  { section: 'competences', titre: 'Travail en équipe', periode: '', details: '' },
+  { section: 'competences', titre: 'Communication', periode: '', details: '' },
+  { section: 'experience', titre: 'Participante — compétition nationale de débat', periode: '2023/2024', details: 'Développement de la communication orale\nArgumentation et esprit critique\nGestion du stress et des situations de tension' },
+  { section: 'langues', titre: 'Français', periode: '', details: '' },
+  { section: 'langues', titre: 'Anglais', periode: '', details: '' },
+  { section: 'objectifs', titre: 'Acquérir une expérience professionnelle en développement web.', periode: '', details: '' },
+  { section: 'interets', titre: 'Débats', periode: '', details: '' },
+  { section: 'interets', titre: 'Technologie', periode: '', details: '' },
+  { section: 'interets', titre: 'Travail collaboratif', periode: '', details: '' },
+]
+
+const sectionsCv = [
+  { cle: 'formation', titre: 'Formation', type: 'lignes' },
+  { cle: 'competences', titre: 'Compétences', type: 'liste' },
+  { cle: 'experience', titre: 'Expérience', type: 'lignes' },
+  { cle: 'langues', titre: 'Langues', type: 'liste' },
+  { cle: 'objectifs', titre: 'Objectifs', type: 'texte' },
+  { cle: 'interets', titre: "Centres d'intérêt", type: 'liste' },
+]
+
 export default function Home() {
   const [profil, setProfil] = useState(profilParDefaut)
   const [competences, setCompetences] = useState(competencesDefaut)
   const [realisations, setRealisations] = useState(realisationsParDefaut)
   const [form, setForm] = useState({ nom: '', email: '', sujet: '', message: '' })
   const [statut, setStatut] = useState(null)
+  const [cvEntries, setCvEntries] = useState(cvParDefaut)
 
   useEffect(() => {
     axios.get(API_URL + '/profile')
@@ -62,6 +88,12 @@ export default function Home() {
     axios.get(API_URL + '/skills')
       .then((res) => {
         if (res.data && res.data.length > 0) setCompetences(res.data)
+      })
+      .catch(() => {})
+
+    axios.get(API_URL + '/cv-entries')
+      .then((res) => {
+        if (res.data && res.data.length > 0) setCvEntries(res.data)
       })
       .catch(() => {})
 
@@ -87,6 +119,8 @@ export default function Home() {
       setStatut('erreur')
     }
   }
+
+  const cvIntro = profil.cv_intro || "Étudiante en Licence 2 en développement web à AFI l'UE, sérieuse, dynamique et motivée. Capable de gérer des situations imprévues et de travailler sous pression."
 
   const contacts = [
     { texte: profil.email, lien: 'mailto:' + profil.email, externe: false, icone: 'mail' },
@@ -173,40 +207,44 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="cv" className="max-w-4xl mx-auto px-6 py-16 sm:py-24">
+      <section id="cv" className="max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-24">
         <p className="text-pink-500 text-sm font-semibold tracking-widest uppercase text-center mb-2">Parcours</p>
         <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-center">Mon CV</h2>
-        <p className="text-gray-500 mb-10 text-center leading-relaxed">Étudiante en Licence 2 en développement web à AFI l'UE, sérieuse, dynamique et motivée. Capable de gérer des situations imprévues et de travailler sous pression.</p>
-        <div className="grid sm:grid-cols-2 gap-8 mb-10">
-          <div>
-            <h3 className="text-pink-500 font-semibold text-sm uppercase tracking-widest mb-3 border-b border-pink-100 pb-2">Formation</h3>
-            <div className="flex flex-col sm:flex-row sm:justify-between text-sm mb-3 sm:mb-2"><span className="font-medium">Licence 2 en développement web — AFI l'UE</span><span className="text-gray-400">2026</span></div>
-            <div className="flex flex-col sm:flex-row sm:justify-between text-sm"><span className="font-medium">Baccalauréat — David Diop Mendès</span><span className="text-gray-400">2024</span></div>
-          </div>
-          <div>
-            <h3 className="text-pink-500 font-semibold text-sm uppercase tracking-widest mb-3 border-b border-pink-100 pb-2">Compétences</h3>
-            <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside"><li>Développement web (bases)</li><li>Gestion du stress et des situations imprévues</li><li>Travail en équipe</li><li>Communication</li></ul>
-          </div>
-          <div>
-            <h3 className="text-pink-500 font-semibold text-sm uppercase tracking-widest mb-3 border-b border-pink-100 pb-2">Expérience</h3>
-            <div className="flex flex-col sm:flex-row sm:justify-between text-sm mb-2 sm:mb-1"><span className="font-medium">Participante — compétition nationale de débat</span><span className="text-gray-400 whitespace-nowrap sm:ml-2">2023/2024</span></div>
-            <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside"><li>Développement de la communication orale</li><li>Argumentation et esprit critique</li><li>Gestion du stress et des situations de tension</li></ul>
-          </div>
-          <div>
-            <h3 className="text-pink-500 font-semibold text-sm uppercase tracking-widest mb-3 border-b border-pink-100 pb-2">Langues</h3>
-            <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside"><li>Français</li><li>Anglais</li></ul>
-          </div>
-          <div>
-            <h3 className="text-pink-500 font-semibold text-sm uppercase tracking-widest mb-3 border-b border-pink-100 pb-2">Objectifs</h3>
-            <p className="text-sm text-gray-600">Acquérir une expérience professionnelle en développement web.</p>
-          </div>
-          <div>
-            <h3 className="text-pink-500 font-semibold text-sm uppercase tracking-widest mb-3 border-b border-pink-100 pb-2">Centres d'intérêt</h3>
-            <ul className="text-sm text-gray-600 space-y-1 list-disc list-inside"><li>Débats</li><li>Technologie</li><li>Travail collaboratif</li></ul>
-          </div>
+        <p className="text-gray-500 mb-10 text-center leading-relaxed">{cvIntro}</p>
+        <div className="grid grid-cols-2 gap-4 sm:gap-8 mb-10">
+          {sectionsCv.map((s) => {
+            const items = cvEntries.filter((e) => e.section === s.cle)
+            if (items.length === 0) return null
+            return (
+              <div key={s.cle}>
+                <h3 className="text-pink-500 font-semibold text-xs sm:text-sm uppercase tracking-wide sm:tracking-widest mb-3 border-b border-pink-100 pb-2">{s.titre}</h3>
+                {s.type === 'lignes' && items.map((e, i) => (
+                  <div key={e.id || i} className="mb-3">
+                    <div className="flex flex-col sm:flex-row sm:justify-between text-xs sm:text-sm mb-1">
+                      <span className="font-medium">{e.titre}</span>
+                      {e.periode && <span className="text-gray-400 whitespace-nowrap sm:ml-2">{e.periode}</span>}
+                    </div>
+                    {e.details && (
+                      <ul className="text-xs sm:text-sm text-gray-600 space-y-1 list-disc list-inside">
+                        {e.details.split('\n').filter((ligne) => ligne.trim() !== '').map((ligne, j) => <li key={j}>{ligne}</li>)}
+                      </ul>
+                    )}
+                  </div>
+                ))}
+                {s.type === 'liste' && (
+                  <ul className="text-xs sm:text-sm text-gray-600 space-y-1 list-disc list-inside">
+                    {items.map((e, i) => <li key={e.id || i}>{e.titre}</li>)}
+                  </ul>
+                )}
+                {s.type === 'texte' && items.map((e, i) => (
+                  <p key={e.id || i} className="text-xs sm:text-sm text-gray-600 mb-1">{e.titre}</p>
+                ))}
+              </div>
+            )
+          })}
         </div>
         <div className="text-center">
-          <a href="/cv.pdf" download="CV_Aissatou_Dia.pdf" className="inline-block bg-pink-500 text-white px-8 sm:px-10 py-4 rounded-full font-medium hover:bg-pink-600 hover:shadow-xl transition-all duration-300">Télécharger mon CV (PDF)</a>
+          <a href={profil.cv_lien || '/cv.pdf'} {...(profil.cv_lien ? { target: '_blank', rel: 'noreferrer' } : { download: 'CV_Aissatou_Dia.pdf' })} className="inline-block bg-pink-500 text-white px-8 sm:px-10 py-4 rounded-full font-medium hover:bg-pink-600 hover:shadow-xl transition-all duration-300">Télécharger mon CV (PDF)</a>
         </div>
       </section>
 

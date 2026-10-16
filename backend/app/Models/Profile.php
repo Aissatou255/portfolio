@@ -13,6 +13,7 @@ class Profile extends Model
     protected $fillable = [
         'nom', 'titre', 'bio', 'sous_titre', 'photo',
         'email', 'telephone', 'ville', 'github', 'linkedin',
+        'cv_intro', 'cv_lien',
     ];
 
     protected $appends = ['photo_url'];

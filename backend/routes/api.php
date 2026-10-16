@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AchievementController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\CvEntryController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\SkillController;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/achievements', [AchievementController::class, 'index']);
 Route::get('/skills', [SkillController::class, 'index']);
 Route::get('/profile', [ProfileController::class, 'show']);
+Route::get('/cv-entries', [CvEntryController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'store'])->middleware('throttle:5,1');
 Route::post('/login', [AuthController::class, 'login']);
 

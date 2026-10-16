@@ -56,6 +56,16 @@ class ProfileForm
                     ->label('LinkedIn')
                     ->url()
                     ->maxLength(255),
+                Textarea::make('cv_intro')
+                    ->label("Texte d'introduction du CV")
+                    ->rows(4)
+                    ->columnSpanFull(),
+                TextInput::make('cv_lien')
+                    ->label('Lien du CV (PDF)')
+                    ->url()
+                    ->maxLength(255)
+                    ->helperText('Facultatif. Laissez vide pour utiliser le fichier cv.pdf du site.')
+                    ->columnSpanFull(),
             ]);
     }
 }
